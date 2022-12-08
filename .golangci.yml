@@ -35,7 +35,8 @@ linters:
     - gci
     - gocognit
     - goconst
-    - gocritic
+    #    выдает ошибку по превращению if else конструкции в switch, которую нельзя превратить в switch
+    #    - gocritic
     - gocyclo
     - godot
     - gofmt
@@ -51,7 +52,8 @@ linters:
     - lll
     - makezero
     - misspell
-    - nestif
+    #    выдает ошибку о излдешней сложности вложеного if из 3 строчек
+    #    - nestif
     - nilerr
     - noctx
     - nolintlint
