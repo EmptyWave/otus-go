@@ -3,7 +3,6 @@ package hw03frequencyanalysis
 import (
 	"regexp"
 	"sort"
-	"strings"
 )
 
 type word struct {
@@ -22,7 +21,7 @@ func (p *parser) parse() {
 	reg, _ := regexp.Compile(p.pattern)
 
 	for _, word := range reg.FindAllString(p.rowData, -1) {
-		p.parsedData[strings.ToLower(word)]++
+		p.parsedData[word]++
 	}
 
 	p.words = make([]word, 0, len(p.parsedData))
