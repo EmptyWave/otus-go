@@ -1,6 +1,7 @@
 package hw03frequencyanalysis
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -48,35 +49,29 @@ func TestTop10(t *testing.T) {
 		require.Len(t, Top10(""), 0)
 	})
 
+	t.Run("no words in empty string", func(t *testing.T) {
+		assert.Len(t, Top10(""), 0)
+	})
+
 	t.Run("positive test", func(t *testing.T) {
-		if taskWithAsteriskIsCompleted {
-			expected := []string{
-				"а",         // 8
-				"он",        // 8
-				"и",         // 6
-				"ты",        // 5
-				"что",       // 5
-				"в",         // 4
-				"его",       // 4
-				"если",      // 4
-				"кристофер", // 4
-				"не",        // 4
-			}
-			require.Equal(t, expected, Top10(text))
-		} else {
-			expected := []string{
-				"он",        // 8
-				"а",         // 6
-				"и",         // 6
-				"ты",        // 5
-				"что",       // 5
-				"-",         // 4
-				"Кристофер", // 4
-				"если",      // 4
-				"не",        // 4
-				"то",        // 4
-			}
-			require.Equal(t, expected, Top10(text))
-		}
+		expected := []string{"он", "а", "и", "ты", "что", "-", "Кристофер", "если", "не", "то"}
+		require.Equal(t, expected, Top10(text))
+	})
+
+	t.Run("no words in a string of punctuation marks only", func(t *testing.T) {
+		s := "..,?:!!!"
+		require.Len(t, Top10(s), 1)
+	})
+
+	t.Run("one word", func(t *testing.T) {
+		s := "слово"
+		expected := []string{"слово"}
+		require.ElementsMatch(t, expected, Top10(s))
+	})
+
+	t.Run("numerics", func(t *testing.T) {
+		s := "password is 123! 1-2-3?"
+		expected := []string{"password", "is", "123!", "1-2-3?"}
+		require.ElementsMatch(t, expected, Top10(s))
 	})
 }
