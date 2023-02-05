@@ -114,7 +114,6 @@ func TestPipeline(t *testing.T) {
 		require.Equal(t, []string{}, result)
 		require.Less(t, int64(elapsed),
 			int64(sleepPerStage)*int64(len(stages)+len(data)-1)+int64(fault))
-
 	})
 
 	t.Run("empty stages", func(t *testing.T) {
