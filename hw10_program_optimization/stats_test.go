@@ -36,4 +36,10 @@ func TestGetDomainStat(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, DomainStat{}, result)
 	})
+
+	t.Run("find 'net'", func(t *testing.T) {
+		result, err := GetDomainStat(bytes.NewBufferString(data), "net")
+		require.NoError(t, err)
+		require.Equal(t, DomainStat{"teklist.net": 1}, result)
+	})
 }
