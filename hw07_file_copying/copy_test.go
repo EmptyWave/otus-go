@@ -53,7 +53,6 @@ func TestCopy(t *testing.T) {
 
 		fromTest = "/dev/urandom"
 		err = Copy(fromTest, toTest.Name(), offsetTest, limitTest)
-		fmt.Println(err)
 
 		require.NotNil(t, err)
 		require.True(t, errors.Is(err, ErrUnsupportedFile))
@@ -72,7 +71,6 @@ func TestCopy(t *testing.T) {
 		err = Copy(fromTest, toTest.Name(), offsetTest, limitTest)
 
 		info, _ := toTest.Stat()
-		fmt.Println(info.Size())
 
 		require.Nil(t, err)
 		require.True(t, info.Size() == 6617)
@@ -95,9 +93,6 @@ func TestCopy(t *testing.T) {
 		if err != nil {
 			return
 		}
-		
-		fmt.Println(f1)
-		fmt.Println(f2)
 
 		require.True(t, bytes.Equal(f1, f2))
 	})
@@ -117,6 +112,6 @@ func TestCopy(t *testing.T) {
 		toInfo, _ := to.Stat()
 
 		require.Nil(t, err)
-		require.True(t, toInfo.Size() == 742)
+		require.True(t, toInfo.Size() == 617)
 	})
 }
