@@ -15,8 +15,7 @@ func RunCmd(cmd []string, env Environment) (returnCode int) {
 
 	comm.Env = prepareCmdEnv(env)
 
-	err := comm.Run()
-	if err != nil {
+	if comm.Run() != nil {
 		returnCode = comm.ProcessState.ExitCode()
 	}
 
