@@ -26,7 +26,7 @@ type DomainStat map[string]int
 
 func GetDomainStat(r io.Reader, domain string) (DomainStat, error) {
 	result := make(DomainStat)
-	reg, _ := regexp.Compile("\\." + domain)
+	reg, _ := regexp.Compile("(?m)(@)[^.]+\\." + domain)
 
 	s := bufio.NewScanner(r)
 	user := User{}
